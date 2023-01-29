@@ -8,9 +8,11 @@ import TextField from '@mui/material/TextField';
 
 function MovieForm() {
 
-    //assinging inputs a piece of state
+    //assinging input a piece of state
     const [search, setSearch] = useState('');
     const dispatch = useDispatch();
+    //get searchResults from the redux store
+    const searchResults = useSelector(store => store.searchResults);
 
     const searchMovies = (event) => {
         event.preventDefault();
@@ -25,6 +27,7 @@ function MovieForm() {
     return(
         <>
             <form onSubmit={searchMovies}>
+                <h2>Search for a Movie: </h2>
                 <TextField 
                     value={search}
                     label="Your search awaits!"
@@ -40,6 +43,22 @@ function MovieForm() {
                     Search
                 </Button>
             </form>
+            <br></br>
+
+            <h2>Search Results:</h2>
+            <div>
+                {searchResults.map(results => {
+                    return (
+                        <MovieFormItem 
+                            key={results.id}
+                            // sending results to MovieFormItem as a prop
+                            results={results}
+                        />
+                    )
+                })}
+            </div>
+
+
         </>
     )
 }

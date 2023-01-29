@@ -119,6 +119,7 @@ const storeInstance = createStore(
         movies,
         genres,
         movieDetails,
+        searchResults
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
