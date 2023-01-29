@@ -43,6 +43,11 @@ function* fetchMovieDetails(action) {
         type: 'SET_MOVIE_DETAILS',
         payload: response.data
     })
+    //also going to send redux the genre info for each movie
+    yield put({
+        type: 'SET_GENRES',
+        payload: response.data.genres
+    })
 }
 
 // Create sagaMiddleware

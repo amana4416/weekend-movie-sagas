@@ -2,6 +2,10 @@
     display: inline-block;
 }
 
+.genre {
+    display: inline-block;
+    margin: 10px;
+}
 
 .detailsPoster {
     justify-content: center;

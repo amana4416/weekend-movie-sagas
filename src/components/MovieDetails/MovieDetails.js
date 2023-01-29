@@ -12,8 +12,9 @@ function MovieDetails() {
     const dispatch = useDispatch();
     const params = useParams();
     const history = useHistory();
-    //call movieDetails from redux store
+    //call movieDetails and genres array from redux store
     const movieDetails = useSelector(store => store.movieDetails);
+    const movieGenre = useSelector(store => store.genres);
 
     useEffect (() => {
         const movieId = params.id;
@@ -51,6 +52,12 @@ function MovieDetails() {
         >
             <section className="text">
                 <h2> {movieDetails.title}</h2>
+                <h3>Genre(s):</h3>
+                {movieGenre.map((genre) => {
+                    return (
+                        <h4 key={genre} className="genre">{genre}</h4>
+                    )
+                })}
                 <h3>{movieDetails.description}</h3>
             </section>
         </Paper>
