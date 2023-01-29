@@ -8,12 +8,12 @@ function App() {
     <div className="App">
       <h1>The Movies Saga!</h1>
       <Router>        
-        <Route path="/" exact>
+        <Route exact path="/">
           <MovieList />
         </Route>
         
         {/* Details page */}
-        <Route path="/details" exact>
+        <Route exact path="/details/:id">
           <MovieDetails />
         </Route>
         {/* Add Movie page */}

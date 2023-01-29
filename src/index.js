@@ -13,7 +13,7 @@ import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('SAGA/FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('SAGA/FETCH_MOVIE_DETAILS', fetchMovieDetails);
 }
 
@@ -38,7 +38,7 @@ function* fetchMovieDetails(action) {
         url: `/api/movie/${movieId}`
     })
     //now that we have the movie details back from the server,
-    // we're going to send it to our movieDetails reducer
+    //we're going to send it to our movieDetails reducer
     yield put({
         type: 'SET_MOVIE_DETAILS',
         payload: response.data
@@ -89,7 +89,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        movieDetails
+        movieDetails,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
