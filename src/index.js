@@ -29,6 +29,21 @@ function* fetchAllMovies() {
         
 }
 
+//we want to use action.payload in our function, so we need to give 'action' as a parameter
+function* fetchMovieDetails(action) {
+    const movieId = action.payload;
+    const response = yield axios({
+        method: 'GET',
+        url: `/api/movie/${movieId}`
+    })
+    //now that we have the movie details back from the server,
+    // we're going to send it to our movieDetails reducer
+    yield put({
+        type: 'SET_MOVIE_DETAILS',
+        payload: response.data
+    })
+}
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -52,11 +67,28 @@ const genres = (state = [], action) => {
     }
 }
 
+//movie details reducer, storing info on the movie you clicked on to see its details
+const movieDetails = (state = {}, action) => {
+    switch (action.type) {
+        //when you want to see the movie details
+        case 'SET_MOVIE_DETAILS':
+            return action.payload;
+        //when you want go back to the movie list
+        // this will clear the object so the next movie
+        //you click on can be stored in the object
+        case 'CLEAR_MOVIE_DETAILS':
+            return {};
+        default: 
+            return state;
+    }
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        movieDetails
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
