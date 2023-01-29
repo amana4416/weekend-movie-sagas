@@ -1,0 +1,18 @@
+.MuiPaper-root {
+    display: inline-block;
+}
+
+
+.detailsPoster {
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    width: auto;
+    padding-top: 35px;
+}
+
+
+.text {
+    color: #663F46;
+}
+

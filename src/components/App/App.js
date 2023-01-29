@@ -19,7 +19,7 @@ function App() {
         {/* Add Movie page */}
       </Router>
     </div>
-  );
+  )
 }
 
 

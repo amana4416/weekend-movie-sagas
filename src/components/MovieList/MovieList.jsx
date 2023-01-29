@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './MovieList.css'
+//mui components
+import Paper from '@mui/material/Paper';
 
 function MovieList() {
 
@@ -24,13 +26,16 @@ function MovieList() {
             <section className="movies">
                 {movies.map(movie => {
                     return (
-                        <div 
+                        <Paper 
+                            className="paper"
+                            elevation={3}
+                            sx={{backgroundColor: '#B8C4BB', margin: '30px', height: '390px', width: '300px'}}
                             key={movie.id} 
                             onClick={(e) => { showDetails(movie) }} 
                         >
                             <h3>{movie.title}</h3>
                             <img src={movie.poster} alt={movie.title}/>
-                        </div>
+                        </Paper>
                     );
                 })}
             </section>
