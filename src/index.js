@@ -15,6 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('SAGA/FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('SAGA/FETCH_MOVIE_DETAILS', fetchMovieDetails);
+    yield takeEvery('SAGA/SEARCH_MOVIES', searchMovies);
 }
 
 function* fetchAllMovies() {
@@ -27,7 +28,6 @@ function* fetchAllMovies() {
     } catch {
         console.log('get all error');
     }
-        
 }
 
 //we want to use action.payload in our function, so we need to give 'action' as a parameter
@@ -47,6 +47,20 @@ function* fetchMovieDetails(action) {
     yield put({
         type: 'SET_GENRES',
         payload: response.data.genres
+    })
+}
+
+//we need action.payload again so we give it to the function as an argument
+function* searchMovies(action) {
+    const search =action.payload;
+    const response = yield axios({
+        method: 'GET',
+        url: `/search/${search}`
+    })
+    //move api response to be stored in searchResults reducer
+    yield put({
+        type: 'SET_SEARCH_RESULTS',
+        payload: response.data
     })
 }
 
@@ -85,6 +99,16 @@ const movieDetails = (state = {}, action) => {
         case 'CLEAR_MOVIE_DETAILS':
             return {};
         default: 
+            return state;
+    }
+}
+
+//reducer to store movies from search results
+const searchResults = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_SEARCH_RESULTS':
+            return action.payload;
+        default:
             return state;
     }
 }
