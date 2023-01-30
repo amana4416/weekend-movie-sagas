@@ -4,6 +4,7 @@ import MovieList from '../MovieList/MovieList'
 import MovieDetails from '../MovieDetails/MovieDetails';
 import MovieForm from '../MovieForm/MovieForm';
 import Favorites from '../Favorites/Favorites';
+import ResultsDetails from '../ResultsDetails/ResultsDetails';
 //mui componenents
 import Button from '@mui/material/Button';
 import { margin } from '@mui/system';
@@ -29,7 +30,7 @@ function App() {
       >
         <Link to="/favorites">Favorites</Link>
       </Button>     
-      
+
         <Route exact path="/">
           <MovieList />
         </Route>
@@ -40,6 +41,9 @@ function App() {
         {/* Add Movie page */}
         <Route exact path="/search">
             <MovieForm />
+        </Route>
+        <Route exact path="/results/:id">
+          <ResultsDetails />
         </Route>
         <Route exact path="/favorites">
           <Favorites />

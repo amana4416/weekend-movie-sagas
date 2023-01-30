@@ -16,6 +16,7 @@ function* rootSaga() {
     yield takeEvery('SAGA/FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('SAGA/FETCH_MOVIE_DETAILS', fetchMovieDetails);
     yield takeEvery('SAGA/SEARCH_MOVIES', fetchSearchResults);
+    yield takeEvery('SAGA/FETCH_RESULTS_MOVIE_DETAILS', fetchResultsDetails);
 }
 
 function* fetchAllMovies() {
@@ -64,6 +65,16 @@ function* fetchSearchResults(action) {
     
 }
 
+//need access to action.payload
+function* fetchResultsDetails(action) {
+    const resultsId = action.payload;
+    const response = yield axios({
+        method: 'GET',
+        url:  `/api/search/${resultsId}`
+    })
+    
+}
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -94,7 +105,7 @@ const movieDetails = (state = {}, action) => {
         case 'SET_MOVIE_DETAILS':
             return action.payload;
         //when you want go back to the movie list
-        // this will clear the object so the next movie
+        //this will clear the object so the next movie
         //you click on can be stored in the object
         case 'CLEAR_MOVIE_DETAILS':
             return {};
@@ -113,13 +124,26 @@ const searchResults = (state = [], action) => {
     }
 }
 
+//reducer to store movie info from movies that were searched with API
+const resultsDetails = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_SEARCH_RESULT_DETAILS':
+            return action.payload;
+        case 'CLEAR_SEARCH_RESULT_DETAILS':
+            return [];
+        default:
+            return state;
+    }
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
         movieDetails,
-        searchResults
+        searchResults,
+        resultsDetails
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

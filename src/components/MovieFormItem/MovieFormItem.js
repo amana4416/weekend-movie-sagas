@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './MovieFormItem.css';
 //mui components
@@ -8,13 +7,14 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 //pass results through as a prop from MovieForm
 function MovieFormItem({results}) {
-
-  
     
     const dispatch = useDispatch();
     const history = useHistory();
 
-
+    const showResultsDetails = (results) => {
+        console.log(results.id)
+        history.push(`/results/${results.id}`)
+    }
     
     return (
         <>
@@ -24,7 +24,10 @@ function MovieFormItem({results}) {
                 sx={{backgroundColor: '#B8C4BB', margin: '30px', height: '420px', width: '410px'}}
             >
                 <h4>{results.original_title}</h4>
-                <img src={`https://image.tmdb.org/t/p/original/${results.poster_path}`} alt={results.title} />
+                <img 
+                    src={`https://image.tmdb.org/t/p/original/${results.poster_path}`} alt={results.title} 
+                    onClick={(e) => { showResultsDetails(results) }} 
+                />
                 <div>
                     <p>Add to Favorites List <FavoriteIcon /></p>
                 </div>
