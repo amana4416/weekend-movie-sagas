@@ -1,4 +1,3 @@
-const { Equalizer } = require('@mui/icons-material');
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
@@ -7,16 +6,16 @@ const pool = require('../modules/pool')
 router.post('/', (req, res) => {
     console.log('HELLO NEW FAV',req.body)
     const newFavorite = req.body;
-    const newName = req.body.name;
-    const newPoster = req.body.poster;
-    const newDescription = req.body.newDescription
+    const newTitle = newFavorite.title;
+    const newPoster = newFavorite.poster;
+    const newDescription = newFavorite.description
     const sqlQuery = `
-      INSERT INTO "favorites" (name, poster, description)
+      INSERT INTO "favorites" (title, poster, description)
         VALUES 
         ($1, $2, $3);
     `;
-    const sqlValue = [newName, newPoster, newDescription];
-    pool.query(sqlQuery, sqlValue)
+    const sqlValues = [newTitle, newPoster, newDescription];
+    pool.query(sqlQuery, sqlValues)
     .then((response) => {
       //lets hope this works!!
       res.sendStatus(202);

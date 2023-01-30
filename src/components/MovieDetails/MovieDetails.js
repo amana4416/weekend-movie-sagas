@@ -5,6 +5,7 @@ import './MovieDetails.css';
 //mui components
 import UndoIcon from '@mui/icons-material/Undo';
 import Paper from '@mui/material/Paper';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 function MovieDetails() {
 
@@ -31,6 +32,17 @@ function MovieDetails() {
         history.push('/');
     }
 
+    const addToFavorites = () => {
+        dispatch({
+            type: 'SAGA/ADD_TO_FAVORITES',
+            payload: {
+                title: movieDetails.title,
+                poster: movieDetails.poster,
+                description: movieDetails.description
+            }
+        })
+    }
+
 
     return (
         <>
@@ -39,8 +51,9 @@ function MovieDetails() {
         <Paper 
             className="poster"
             elevation={3}
-            sx={{backgroundColor: '#B8C4BB', height: '520px', width: '410px', margin:'20px',}}
+            sx={{backgroundColor: '#B8C4BB', height: '540px', width: '410px', margin:'20px',}}
         >
+            <p>Add to Favorites List <FavoriteIcon onClick={addToFavorites} /></p>
             <img  src={movieDetails.poster} alt={movieDetails.title} className="detailsPoster" />
         </Paper>
 

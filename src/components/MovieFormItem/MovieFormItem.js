@@ -25,7 +25,7 @@ function MovieFormItem({results}) {
         dispatch({
             type: 'SAGA/ADD_SEARCH_TO_FAVS',
             payload: {
-                name: resultsTitle,
+                title: resultsTitle,
                 poster: resultsPoster,
                 description: resultsDescription
             }

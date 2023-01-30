@@ -18,6 +18,7 @@ function* rootSaga() {
     yield takeEvery('SAGA/SEARCH_MOVIES', fetchSearchResults);
     // yield takeEvery('SAGA/FETCH_RESULTS_MOVIE_DETAILS', fetchResultsDetails);
     yield takeEvery('SAGA/ADD_SEARCH_TO_FAVS', addToFavorites);
+    yield takeEvery('SAGA/ADD_TO_FAVORITES', addToFavorites);
 }
 
 function* fetchAllMovies() {
@@ -82,7 +83,11 @@ function* addToFavorites(action) {
     const response = yield axios ({
         method: 'POST',
         url: '/api/favorites',
-        data: {newFavorite}
+        data: {
+            title: newFavorite.title,
+            poster: newFavorite.poster,
+            description: newFavorite.description
+        }
     })
     //update favorites reducer
     yield put ({
