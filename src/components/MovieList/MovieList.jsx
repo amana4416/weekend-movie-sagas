@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import './MovieList.css'
 //mui components
 import Paper from '@mui/material/Paper';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 function MovieList() {
 
@@ -20,6 +21,18 @@ function MovieList() {
         history.push(`/details/${movie.id}`)
     }
 
+    const addToFavorites = (movie) => {
+        console.log('we added a movie to the favorites table from MovieList')
+        dispatch({
+            type: 'SAGA/ADD_TO_FAVORITES',
+            payload: {
+                title: movie.title,
+                poster: movie.poster,
+                description: movie.description
+            }
+        })
+    }
+
     return (
         <main>
             <h1>MovieList</h1>
@@ -29,12 +42,17 @@ function MovieList() {
                         <Paper 
                             className="paper"
                             elevation={3}
-                            sx={{backgroundColor: '#B8C4BB', margin: '30px', height: '390px', width: '300px'}}
+                            sx={{backgroundColor: '#B8C4BB', margin: '30px', height: '420px', width: '300px'}}
                             key={movie.id} 
-                            onClick={(e) => { showDetails(movie) }} 
                         >
                             <h3>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title}/>
+                            <img 
+                                src={movie.poster} alt={movie.title}
+                                onClick={(e) => {showDetails(movie)}} 
+                            />
+                            <div>
+                                <p>Add to Favorites List <FavoriteIcon onClick={() => addToFavorites(movie)} /></p>
+                            </div>
                         </Paper>
                     );
                 })}

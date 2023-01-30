@@ -91,7 +91,8 @@ function* addToFavorites(action) {
     })
     //update favorites reducer
     yield put ({
-        type: 'SET_FAVORITES'
+        type: 'SET_FAVORITES',
+        payload: response.data
     })
 }
 

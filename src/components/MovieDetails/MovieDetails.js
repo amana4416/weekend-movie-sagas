@@ -33,6 +33,7 @@ function MovieDetails() {
     }
 
     const addToFavorites = () => {
+        console.log('we added a movie to the favorites table from MovieDetails')
         dispatch({
             type: 'SAGA/ADD_TO_FAVORITES',
             payload: {

@@ -22,6 +22,7 @@ function MovieFormItem({results}) {
      const resultsDescription = results.overview;
 
     const addToFavorites = (id) => {
+        console.log('we added a movie to the favorites table from MovieFromItem')
         dispatch({
             type: 'SAGA/ADD_SEARCH_TO_FAVS',
             payload: {
