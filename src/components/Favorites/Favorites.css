@@ -1,0 +1,17 @@
+.movies {
+    display : inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #3C362A;
+}
+
+h3 {
+    align-items: center;
+    color: #663F46;
+}
+
+img {
+    align-items: center;
+    height: 300px;
+    width: auto;
+}

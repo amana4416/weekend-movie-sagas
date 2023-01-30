@@ -5,17 +5,17 @@ const pool = require('../modules/pool')
 //get route to display favorite movies
 router.get('/', (req, res) => {
   const sqlQuery = `
-    SELECT * FROM favorites
+    SELECT * FROM favorites 
       ORDER BY "title" ASC;
-  `;
+    `;
   pool.query(sqlQuery)
-  .then((response) => {
-    res.send(response.rows);
-  })
-  .catch((error) => {
-    console.log('error in /api/favorites GET', error);
-    res.sendStatus(500);
-  })
+    .then(response => {
+      res.send(response.rows);
+    })
+    .catch(error => {
+      console.log('error in /api/favorites GET', error);
+      res.sendStatus(500);
+    })
 })
 
 //post route to add favorite movies

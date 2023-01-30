@@ -7,7 +7,6 @@ import Favorites from '../Favorites/Favorites';
 import ResultsDetails from '../ResultsDetails/ResultsDetails';
 //mui componenents
 import Button from '@mui/material/Button';
-import { margin } from '@mui/system';
 
 function App() {
   return (

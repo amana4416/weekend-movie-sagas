@@ -1,10 +1,10 @@
 .body {
-  background: #3C362A;
+  background-color: #3C362A;
 }
 
 .App {
   text-align: center;
-  background: #3C362A;
+  background-color: #3C362A;
   color: #E8F7EE
 }
 
@@ -13,7 +13,7 @@
   /* background-color: #3C362A; */
   height: 150px;
   padding: 20px;
-  color: white;
+  /* color: white; */
 }
 
 .App-title {

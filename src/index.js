@@ -16,9 +16,10 @@ function* rootSaga() {
     yield takeEvery('SAGA/FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('SAGA/FETCH_MOVIE_DETAILS', fetchMovieDetails);
     yield takeEvery('SAGA/SEARCH_MOVIES', fetchSearchResults);
-    yield takeEvery('SAGA/FETCH_RESULTS_MOVIE_DETAILS', fetchResultsDetails);
+    // yield takeEvery('SAGA/FETCH_RESULTS_MOVIE_DETAILS', fetchResultsDetails);
     yield takeEvery('SAGA/ADD_SEARCH_TO_FAVS', addToFavorites);
     yield takeEvery('SAGA/ADD_TO_FAVORITES', addToFavorites);
+    yield takeEvery('SAGA/FETCH_FAVORITE_MOVIES', fetchFavoriteMovies);
 }
 
 function* fetchAllMovies() {
@@ -93,8 +94,17 @@ function* addToFavorites(action) {
             description: newFavorite.description
         }
     })
-    //update favorites reducer
+    //calling get request so favorites page can update
     yield put ({
+        type: 'SAGA/FETCH_FAVORITE_MOVIES',
+    })
+}
+
+function* fetchFavoriteMovies() {
+    console.log('getting favorite movies')
+    const response =  yield axios.get('/api/favorites');
+    //got favorites table from server, not give it to redux for storage
+    yield put({
         type: 'SET_FAVORITES',
         payload: response.data
     })
