@@ -5,6 +5,7 @@ import './MovieForm.css'
 //mui components
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { Movie } from '@mui/icons-material';
 
 function MovieForm() {
 
@@ -36,7 +37,7 @@ function MovieForm() {
                     onChange={(event) => setSearch(event.target.value)}
                 />
                 <Button
-                    varient="contained"
+                    varient='contained'
                     type='submit'
                     sx={{backgroundColor: '#E8F7EE', color: '#663F46', margin: '10px'}}
                 >

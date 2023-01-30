@@ -15,7 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('SAGA/FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('SAGA/FETCH_MOVIE_DETAILS', fetchMovieDetails);
-    yield takeEvery('SAGA/SEARCH_MOVIES', searchMovies);
+    yield takeEvery('SAGA/SEARCH_MOVIES', fetchSearchResults);
 }
 
 function* fetchAllMovies() {
@@ -51,17 +51,17 @@ function* fetchMovieDetails(action) {
 }
 
 //we need action.payload again so we give it to the function as an argument
-function* searchMovies(action) {
-    const search =action.payload;
+function* fetchSearchResults(action) {
+    const search = action.payload;
     const response = yield axios({
         method: 'GET',
-        url: `/search/${search}`
+        url: `api/search/${search}`
     })
-    //move api response to be stored in searchResults reducer
     yield put({
         type: 'SET_SEARCH_RESULTS',
         payload: response.data
     })
+    
 }
 
 // Create sagaMiddleware
