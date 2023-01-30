@@ -1,0 +1,14 @@
+.MuiPaper-root {
+    display: inline-block;
+}
+
+h4 {
+    align-items: center;
+    color: #663F46;
+}
+
+img {
+    align-items: center;
+    height: 300px;
+    width: auto;
+}
