@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 //get route for movie detail view
 router.get(`/:id`, (req, res) => {
-  console.log('hey we are gettins some movie details');
+  console.log('hey we are getting some movie details');
   const sqlQuery = `
     SELECT movies.id, title, description, poster,
     ARRAY_AGG (genres.name) genres

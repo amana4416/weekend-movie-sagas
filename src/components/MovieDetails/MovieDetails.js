@@ -23,7 +23,7 @@ function MovieDetails() {
             payload: movieId
         })
         return ({
-            type: 'SAGA/CLEAR_MOVIE_DETAILS'
+            type: 'CLEAR_MOVIE_DETAILS'
         })
     }, [params.id])
 
@@ -44,10 +44,9 @@ function MovieDetails() {
         })
     }
 
-
     return (
         <>
-        <h1> <UndoIcon onClick={goBack}>Back</UndoIcon></h1>
+        <h1> <UndoIcon onClick={goBack}>Back</UndoIcon> </h1>
 
         <Paper 
             className="poster"

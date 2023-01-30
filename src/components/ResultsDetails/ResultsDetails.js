@@ -11,7 +11,7 @@ function ResultsDetails() {
     const dispatch = useDispatch();
     const params = useParams();
     const history = useHistory();
-    //call resultsDetails from redux store
+    //call movieDetails from redux store
     const resultsDetails = useSelector(store => store.resultsDetails);
 
     useEffect (() => {
@@ -21,7 +21,7 @@ function ResultsDetails() {
             payload: resultsId
         })
         return ({
-            type: 'SAGA/CLEAR_RESULTS_MOVIE_DETAILS'
+            type: 'CLEAR_RESULT_DETAILS'
         })
     }, [params.id])
 
@@ -31,13 +31,13 @@ function ResultsDetails() {
 
     return (
         <>
-            <h1> <UndoIcon onClick={goBack}>Back</UndoIcon></h1>
+            <h1> <UndoIcon onClick={goBack}>Back</UndoIcon> </h1>
             <Paper 
                 className="poster"
                 elevation={3}
                 sx={{backgroundColor: '#B8C4BB', height: '520px', width: '410px', margin:'20px',}}
             >
-            <img  src={reesultsDetails.poster_path} alt={reesultsDetails.title} className="detailsPoster" />
+            <img  src={resultsDetails.poster} alt={resultsDetails.title} className="detailsPoster" />
         </Paper>
 
         <Paper 
@@ -46,8 +46,8 @@ function ResultsDetails() {
             sx={{backgroundColor: '#B8C4BB', width: '650px', height: 'auto'}}
         >
             <section className="text">
-                <h2> {resultsDetails.title}</h2>
-                <h3>{resultsDetails.overview}</h3>
+                <h2>{resultsDetails.title}</h2>
+                <h3>{resultsDetails.description}</h3>
             </section>
         </Paper>
         </>

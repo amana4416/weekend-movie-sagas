@@ -11,12 +11,8 @@ function MovieFormItem({results}) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // const showResultsDetails = (results) => {
-    //     console.log(results.id)
-    //     history.push(`/results/${results.id}`)
-    // }
-
      //declaring these variables so we can send to a new DB
+     const resultsId = results.id;
      const resultsTitle = results.title;
      const resultsPoster = `https://image.tmdb.org/t/p/original/${results.poster_path}`
      const resultsDescription = results.overview;
@@ -33,6 +29,19 @@ function MovieFormItem({results}) {
         })
     }
 
+    const showResultsDetails = (results) => {
+        dispatch({
+            type: 'SAGA/FETCH_RESULTS_MOVIE_DETAILS',
+            payload: {
+                id: resultsId,
+                title: resultsTitle,
+                poster: resultsPoster,
+                description: resultsDescription
+            }
+        })
+        history.push(`/results/${results.id}`)
+    }
+
     return (
         <>
             <Paper 
@@ -43,7 +52,7 @@ function MovieFormItem({results}) {
                 <h4>{resultsTitle}</h4>
                 <img 
                     src={resultsPoster} alt={resultsTitle} 
-                    // onClick={(e) => { showResultsDetails(results) }} 
+                    onClick={(event) => {showResultsDetails(results)}} 
                 />
                 <div>
                     <p>Add to Favorites List <FavoriteIcon onClick={() => addToFavorites(results.id)} /></p>

@@ -16,7 +16,7 @@ function* rootSaga() {
     yield takeEvery('SAGA/FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('SAGA/FETCH_MOVIE_DETAILS', fetchMovieDetails);
     yield takeEvery('SAGA/SEARCH_MOVIES', fetchSearchResults);
-    // yield takeEvery('SAGA/FETCH_RESULTS_MOVIE_DETAILS', fetchResultsDetails);
+    yield takeEvery('SAGA/FETCH_RESULTS_MOVIE_DETAILS', fetchResultsDetails);
     yield takeEvery('SAGA/ADD_SEARCH_TO_FAVS', addToFavorites);
     yield takeEvery('SAGA/ADD_TO_FAVORITES', addToFavorites);
 }
@@ -69,10 +69,14 @@ function* fetchSearchResults(action) {
 
 //need access to action.payload
 function* fetchResultsDetails(action) {
-    const resultsId = action.payload;
+    const resultsDetails = action.payload;
     const response = yield axios({
         method: 'GET',
-        url:  `/api/search/${resultsId}`
+        url:  `/api/search/${resultsDetails.id}`
+    })
+    yield put({
+        type: 'SET_RESULT_DETAILS',
+        payload: response.data
     })
     
 }
@@ -146,11 +150,11 @@ const searchResults = (state = [], action) => {
 }
 
 //reducer to store movie info from movies that were searched with API
-const resultsDetails = (state = [], action) => {
+const resultsDetails = (state = {}, action) => {
     switch (action.type) {
-        case 'SET_SEARCH_RESULT_DETAILS':
+        case 'SET_RESULT_DETAILS':
             return action.payload;
-        case 'CLEAR_SEARCH_RESULT_DETAILS':
+        case 'CLEAR_RESULT_DETAILS':
             return [];
         default:
             return state;
