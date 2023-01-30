@@ -18,6 +18,24 @@ router.get('/', (req, res) => {
     })
 })
 
+//get route to display favorite movie details
+router.get('/:id', (req, res) => {
+  console.log('hey we are getting some favorite movie details');
+  const sqlQuery = `
+    SELECT * FROM favorites
+      WHERE id=$1;
+  `;
+  const sqlValues = [req.params.id];
+  pool.query(sqlQuery, sqlValues)
+    .then(response => {
+      res.send(response.rows[0]);
+    })
+    .catch(error => {
+      console.log('something broke in /api/favorites/:id GET', error);
+      res.sendStatus(500);
+    })
+})
+
 //post route to add favorite movies
 router.post('/', (req, res) => {
     console.log('HELLO NEW FAV',req.body)

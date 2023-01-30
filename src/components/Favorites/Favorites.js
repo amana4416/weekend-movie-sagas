@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './Favorites.css';
 //mui components
 import Paper from '@mui/material/Paper';
@@ -8,12 +9,18 @@ function Favorites() {
     
     const dispatch = useDispatch();
     const favorites = useSelector(store => store.favoriteMovies);
+    const history = useHistory();
 
     useEffect(() => {
         dispatch({
             type: 'SAGA/FETCH_FAVORITE_MOVIES'
         })
     }, [])
+
+    const showDetails = (favorite) => {
+        console.log(favorite.id);
+        history.push(`/favorites/${favorite.id}`)
+    }
 
     return (
         <> 
@@ -30,7 +37,7 @@ function Favorites() {
                         <h3>{favorite.title}</h3>
                         <img 
                             src={favorite.poster} alt={favorite.title}
-                            // onClick={(e) => {showDetails(movie)}} 
+                            onClick={(e) => {showDetails(favorite)}} 
                         />
                     </Paper>
                 )

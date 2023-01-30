@@ -5,6 +5,7 @@ import MovieDetails from '../MovieDetails/MovieDetails';
 import MovieForm from '../MovieForm/MovieForm';
 import Favorites from '../Favorites/Favorites';
 import ResultsDetails from '../ResultsDetails/ResultsDetails';
+import FavoriteDetails from '../FavoriteDetails/FavoriteDetails';
 //mui componenents
 import Button from '@mui/material/Button';
 
@@ -46,6 +47,9 @@ function App() {
         </Route>
         <Route exact path="/favorites">
           <Favorites />
+        </Route>
+        <Route exact path="/favorites/:id">
+          <FavoriteDetails />
         </Route>
       </Router>
     </div>
