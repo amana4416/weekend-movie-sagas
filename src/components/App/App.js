@@ -1,14 +1,35 @@
-import {HashRouter as Router, Route} from 'react-router-dom';
+import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import './App.css';
 import MovieList from '../MovieList/MovieList'
 import MovieDetails from '../MovieDetails/MovieDetails';
 import MovieForm from '../MovieForm/MovieForm';
+import Favorites from '../Favorites/Favorites';
+//mui componenents
+import Button from '@mui/material/Button';
+import { margin } from '@mui/system';
 
 function App() {
   return (
     <div className="App">
       <h1>The Movies Saga!</h1>
-      <Router>        
+      <Router>   
+      <Button
+      sx={{backgroundColor: '#B8C4BB', color: '#663F46', margin: '5px'}}
+      >
+       <Link to="/">Home</Link>
+      </Button>
+
+      <Button
+      sx={{backgroundColor: '#B8C4BB', color: '#663F46', margin: '5px'}}
+      >
+       <Link to="/search">Search</Link>
+      </Button>
+      <Button
+      sx={{backgroundColor: '#B8C4BB', color: '#663F46', margin: '5px'}}
+      >
+        <Link to="/favorites">Favorites</Link>
+      </Button>     
+      
         <Route exact path="/">
           <MovieList />
         </Route>
@@ -19,7 +40,10 @@ function App() {
         {/* Add Movie page */}
         <Route exact path="/search">
             <MovieForm />
-          </Route>
+        </Route>
+        <Route exact path="/favorites">
+          <Favorites />
+        </Route>
       </Router>
     </div>
   )
