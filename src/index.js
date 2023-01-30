@@ -16,7 +16,7 @@ function* rootSaga() {
     yield takeEvery('SAGA/FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('SAGA/FETCH_MOVIE_DETAILS', fetchMovieDetails);
     yield takeEvery('SAGA/SEARCH_MOVIES', fetchSearchResults);
-    // yield takeEvery('SAGA/FETCH_RESULTS_MOVIE_DETAILS', fetchResultsDetails);
+    // yield takeEvery('SAGA/FETCH_RESULTS_DETAILS', fetchResultsDetails);
     yield takeEvery('SAGA/ADD_SEARCH_TO_FAVS', addToFavorites);
     yield takeEvery('SAGA/ADD_TO_FAVORITES', addToFavorites);
     yield takeEvery('SAGA/FETCH_FAVORITE_MOVIES', fetchFavoriteMovies);

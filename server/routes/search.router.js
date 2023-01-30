@@ -27,6 +27,22 @@ router.get('/:query', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
+     axios({
+        method: 'GET',
+        url: `https://api.themoviedb.org/3/search/movie?api_key=${movie_api_key}&language=en-US&query=${search}`
+    })
+        .then(response => {
+            //send search results
+            console.log(response.data.results)
+            res.send(response.data.results);
+        })
+        .catch(error => {
+            console.log('something broke in /api/search/:id GET', error);
+            res.sendStatus(500);
+        })
+})
+
+router.get('/:id', (req, res) => {
     console.log('seeing result movies details', req.body);
 
 })

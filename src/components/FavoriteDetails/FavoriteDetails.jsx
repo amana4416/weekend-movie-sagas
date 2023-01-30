@@ -26,7 +26,7 @@ function FavoriteDetails() {
     }, [params.id])
 
     const goBack = () => {
-        history.push('/');
+        history.push('/favorites');
     }
 
     return (
