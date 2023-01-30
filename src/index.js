@@ -16,7 +16,8 @@ function* rootSaga() {
     yield takeEvery('SAGA/FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('SAGA/FETCH_MOVIE_DETAILS', fetchMovieDetails);
     yield takeEvery('SAGA/SEARCH_MOVIES', fetchSearchResults);
-    yield takeEvery('SAGA/FETCH_RESULTS_MOVIE_DETAILS', fetchResultsDetails);
+    // yield takeEvery('SAGA/FETCH_RESULTS_MOVIE_DETAILS', fetchResultsDetails);
+    yield takeEvery('SAGA/ADD_SEARCH_TO_FAVS', addToFavorites);
 }
 
 function* fetchAllMovies() {
@@ -73,6 +74,20 @@ function* fetchResultsDetails(action) {
         url:  `/api/search/${resultsId}`
     })
     
+}
+
+//need access to action.payload
+function* addToFavorites(action) {
+    const newFavorite = action.payload;
+    const response = yield axios ({
+        method: 'POST',
+        url: '/api/favorites',
+        data: {newFavorite}
+    })
+    //update favorites reducer
+    yield put ({
+        type: 'SET_FAVORITES'
+    })
 }
 
 // Create sagaMiddleware
@@ -136,6 +151,16 @@ const resultsDetails = (state = [], action) => {
     }
 }
 
+//reducer to store favorite movies
+const favoriteMovies = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_FAVORITES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
@@ -143,7 +168,8 @@ const storeInstance = createStore(
         genres,
         movieDetails,
         searchResults,
-        resultsDetails
+        resultsDetails,
+        favoriteMovies
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

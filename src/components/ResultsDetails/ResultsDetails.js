@@ -25,9 +25,31 @@ function ResultsDetails() {
         })
     }, [params.id])
 
+    const goBack = () => {
+        history.push('/search');
+    }
+
     return (
         <>
-            <h2>here's the deets</h2>
+            <h1> <UndoIcon onClick={goBack}>Back</UndoIcon></h1>
+            <Paper 
+                className="poster"
+                elevation={3}
+                sx={{backgroundColor: '#B8C4BB', height: '520px', width: '410px', margin:'20px',}}
+            >
+            <img  src={reesultsDetails.poster_path} alt={reesultsDetails.title} className="detailsPoster" />
+        </Paper>
+
+        <Paper 
+            className="info"
+            elevation={3}
+            sx={{backgroundColor: '#B8C4BB', width: '650px', height: 'auto'}}
+        >
+            <section className="text">
+                <h2> {resultsDetails.title}</h2>
+                <h3>{resultsDetails.overview}</h3>
+            </section>
+        </Paper>
         </>
     )
 }

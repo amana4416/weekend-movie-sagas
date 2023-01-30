@@ -79,3 +79,11 @@ VALUES
 (12,6), (12,3),           -- Social Net
 (13,6), (13,10), (13,1),  -- Titanic
 (14,1), (14,2), (14,4);   -- Toy Story
+
+-- create a favorites table
+CREATE TABLE "favorites" (
+    "id" SERIAL PRIMARY KEY,
+    "title" VARCHAR(120) NOT NULL,
+    "poster"  VARCHAR(120) NOT NULL,
+  	"description" TEXT NOT NULL
+);
